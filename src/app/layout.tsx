@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +24,28 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+      <header className="bg-[#0f1115] sticky z-10 left-0 top-0 right-0 border-b border-slate-700">
+        <nav className="wrapper py-4 flex items-center justify-between">
+          <div>FitLog</div>
+          <ul className="flex gap-4">
+            <li><Link href="/">Workouts</Link></li>
+            <li><Link href="/my-plan">My Plan</Link></li>
+          </ul>
+          <div className="flex gap-4">
+            <button>Plan</button>
+            <button>Saved</button>
+          </div>
+        </nav>
+      </header>
+        {children}
+        <footer className="py-8 bg-pink-500">
+          <div className="flex justify-between items-center wrapper">
+            <div>FitLog</div>
+            <div>© 2026 FitLog — Workout Library. Train hard, log honest.</div>
+          </div>
+        </footer>
+      </body>
     </html>
   );
 }
