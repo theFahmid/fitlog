@@ -18,7 +18,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SavedExerciseProvider>
           <body className="min-h-full flex flex-col">
             <Navbar />
-            {children}
+            <main className="min-h-screen">
+              {children}
+            </main>
             <footer className="py-8 bg-[#1a1d23]">
               <div className="flex justify-between items-center wrapper">
                 <div className="flex gap-4">
