@@ -4,7 +4,7 @@ import { WorkoutDataType } from "@/types/workout";
 import Image from "next/image";
 
 async function getWorkoutData(id: string): Promise<WorkoutDataType> {
-  const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
+  const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${id}`);
   return res.json();
 }
 

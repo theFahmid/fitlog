@@ -4,7 +4,7 @@ import { WorkoutDataType } from "@/types/workout";
 import WorkoutCard from "./workoutCard";
 
 async function getWorkoutData(): Promise<WorkoutDataType[]> {
-  const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
+  const res = await fetch("https://api.api-store.workers.dev/api/fitlog");
   return res.json();
 }
 
