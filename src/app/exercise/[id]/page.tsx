@@ -1,4 +1,5 @@
 import { WorkoutDataType } from "@/types/workout";
+import Image from "next/image";
 
 async function getWorkoutData(id: string): Promise<WorkoutDataType> {
   const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
@@ -12,29 +13,45 @@ export default async function ExercisePage({
 }) {
   const { id } = await params;
   const data = await getWorkoutData(id);
+  const tableData = [
+    ["Equipment", data.equipment],
+    ["Difficulty", data.difficulty],
+    ["Sets", data.sets],
+    ["Reps", data.reps],
+    ["Duration", data.duration],
+    ["Calories", data.caloriesBurned],
+    ["Rating", data.rating],
+  ];
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 wrapper">
+    <div className="grid grid-cols-1 md:grid-cols-2 wrapper my-12 gap-8">
       <div>
-        <img src={data.image} alt={data.name} className="rounded-xl" />
+        <Image
+          src={data.image}
+          alt={data.name}
+          height={1200}
+          width={1200}
+          className="rounded-xl h-full w-full"
+        />
       </div>
-      <div>
+      <div className="space-y-2">
         <h2>{data.name}</h2>
         <p>{data.description}</p>
         <div className="flex gap-2">
           {data.muscleGroups.map((item, ind) => (
-            <div className="badge text-sm bg-slate-300 rounded-full" key={ind}>
+            <div className="badge text-sm bg-mycolor rounded-full" key={ind}>
               {item}
             </div>
           ))}
         </div>
-        <div className="border border-slate-300">
-          <p>Equipment: {data.equipment}</p>
-          <p>Difficulty: {data.difficulty}</p>
-          <p>Sets: {data.sets}</p>
-          <p>Reps: {data.reps}</p>
-          <p>Duration: {data.duration}</p>
-          <p>Calories: {data.caloriesBurned}</p>
-          <p>Rating: {data.rating}</p>
+        <div className="border border-slate-300 rounded-3xl grid grid-cols-1">
+          {tableData.map((item, ind) => {
+            return (
+              <div key={ind} className="grid grid-cols-2 p-4">
+                <div className="uppercase">{item[0]}</div>
+                <div>{item[1]}</div>
+              </div>
+            );
+          })}
         </div>
         <h3>Instructions</h3>
         <ol className="list-decimal list-inside">
@@ -42,6 +59,10 @@ export default async function ExercisePage({
             <li key={ind}>{item}</li>
           ))}
         </ol>
+        <div className="flex gap-4">
+          <button className="btn btn-primary">Add to today's plan</button>
+          <button className="btn btn-outline">Save for later</button>
+        </div>
       </div>
     </div>
   );
