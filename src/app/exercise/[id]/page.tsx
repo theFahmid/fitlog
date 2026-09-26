@@ -1,3 +1,5 @@
+import ExerciseButtons from "@/components/exercise/exerciseButtons";
+import { useSavedExercise } from "@/contexts/savedExercise";
 import { WorkoutDataType } from "@/types/workout";
 import Image from "next/image";
 
@@ -59,10 +61,7 @@ export default async function ExercisePage({
             <li key={ind}>{item}</li>
           ))}
         </ol>
-        <div className="flex gap-4">
-          <button className="btn btn-primary">Add to today's plan</button>
-          <button className="btn btn-outline">Save for later</button>
-        </div>
+        <ExerciseButtons data={data} />
       </div>
     </div>
   );

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import logo from "@/assets/logo.png";
 import Navbar from "@/components/shared/navbar";
-import SavedExercise from "@/contexts/savedExercise";
-
+import Image from "next/image";
+import SavedExerciseProvider from "@/contexts/savedExercise";
+import PlannedExerciseProvider from "@/contexts/planedExercise";
 
 export const metadata: Metadata = {
   title: "FitLog",
@@ -11,22 +13,26 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`h-full antialiased`}
-    >
-     <SavedExercise>
-       <body className="min-h-full flex flex-col">
-        <Navbar/>
-        {children}
-        <footer className="py-8 bg-pink-500">
-          <div className="flex justify-between items-center wrapper">
-            <div>FitLog</div>
-            <div>© 2026 FitLog — Workout Library. Train hard, log honest.</div>
-          </div>
-        </footer>
-      </body>
-     </SavedExercise>
+    <html lang="en" className={`h-full antialiased`}>
+      <PlannedExerciseProvider>
+        <SavedExerciseProvider>
+          <body className="min-h-full flex flex-col">
+            <Navbar />
+            {children}
+            <footer className="py-8 bg-[#1a1d23]">
+              <div className="flex justify-between items-center wrapper">
+                <div className="flex gap-4">
+                  <Image src={logo} alt={"Logo"} width={20} height={20}></Image>
+                  FitLog
+                </div>
+                <div>
+                  © 2026 FitLog — Workout Library. Train hard, log honest.
+                </div>
+              </div>
+            </footer>
+          </body>
+        </SavedExerciseProvider>
+      </PlannedExerciseProvider>
     </html>
   );
 }
