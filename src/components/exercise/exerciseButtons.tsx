@@ -1,9 +1,9 @@
 "use client";
-import { usePlannedExercise } from "@/contexts/planedExercise";
+import { usePlannedExercise } from "@/contexts/plannedExercise";
 import { useSavedExercise } from "@/contexts/savedExercise";
 import { WorkoutDataType } from "@/types/workout";
 
-export default function ExerciseButtons({data}: { data: WorkoutDataType }) {
+export default function ExerciseButtons({ data }: { data: WorkoutDataType }) {
   const { addSavedExercise } = useSavedExercise();
   const { addPlannedExercise } = usePlannedExercise();
   return (

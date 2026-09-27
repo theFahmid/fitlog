@@ -1,7 +1,7 @@
 "use client";
 
 import SelectedCard from "@/components/my-plan/selectedCard";
-import { usePlannedExercise } from "@/contexts/planedExercise";
+import { usePlannedExercise } from "@/contexts/plannedExercise";
 import { useSavedExercise } from "@/contexts/savedExercise";
 import { WorkoutDataType } from "@/types/workout";
 import { useState } from "react";
@@ -30,22 +30,22 @@ export default function PlanPage() {
           <div>
             {tab === "planned"
               ? plannedExerciseData.reduce((total, item) => {
-                  return total += item.duration;
+                  return (total += item.duration);
                 }, 0)
               : savedExerciseData.reduce((total, item) => {
-                  return total += item.duration;
+                  return (total += item.duration);
                 }, 0)}
           </div>
         </div>
         <div className="flex flex-col gap-2">
           <div>Calories</div>
           <div>
-             {tab === "planned"
+            {tab === "planned"
               ? plannedExerciseData.reduce((total, item) => {
-                  return total += item.caloriesBurned;
+                  return (total += item.caloriesBurned);
                 }, 0)
               : savedExerciseData.reduce((total, item) => {
-                  return total += item.caloriesBurned;
+                  return (total += item.caloriesBurned);
                 }, 0)}
           </div>
         </div>
@@ -83,10 +83,8 @@ export default function PlanPage() {
           {savedExerciseData.length === 0 ? (
             <p>No exercises selected yet.</p>
           ) : (
-            savedExerciseData.map((item, ind) => (
-              <p key={ind}>
-                <SelectedCard data={item} />
-              </p>
+            savedExerciseData.map((item) => (
+              <SelectedCard data={item} tab={tab} key={item.id} />
             ))
           )}
         </div>
@@ -96,10 +94,8 @@ export default function PlanPage() {
           {plannedExerciseData.length === 0 ? (
             <p>No exercises planned yet.</p>
           ) : (
-            plannedExerciseData.map((item, ind) => (
-              <p key={ind}>
-                <SelectedCard data={item} />
-              </p>
+            plannedExerciseData.map((item) => (
+              <SelectedCard data={item} tab={tab} key={item.id} />
             ))
           )}
         </div>

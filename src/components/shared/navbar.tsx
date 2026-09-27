@@ -5,7 +5,7 @@ import logo from "@/assets/logo.png";
 import Link from "next/link";
 import { useState } from "react";
 import { useSavedExercise } from "@/contexts/savedExercise";
-import { usePlannedExercise } from "@/contexts/planedExercise";
+import { usePlannedExercise } from "@/contexts/plannedExercise";
 
 function NavItems() {
   const [active, setActive] = useState("workout");
@@ -86,8 +86,12 @@ export default function Navbar() {
             </ul>
           </div>
           <div className="navbar-end">
-            <a className="btn">Plan ({plannedExerciseData.length})</a>
-            <a className="btn">Saved ({savedExerciseData.length})</a>
+            <Link className="btn" href="/my-plan">
+              Plan ({plannedExerciseData.length})
+            </Link>
+            <Link className="btn" href="/my-plan">
+              Saved ({savedExerciseData.length})
+            </Link>
           </div>
         </div>
       </div>

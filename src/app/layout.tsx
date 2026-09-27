@@ -4,7 +4,8 @@ import logo from "@/assets/logo.png";
 import Navbar from "@/components/shared/navbar";
 import Image from "next/image";
 import SavedExerciseProvider from "@/contexts/savedExercise";
-import PlannedExerciseProvider from "@/contexts/planedExercise";
+import PlannedExerciseProvider from "@/contexts/plannedExercise";
+import { Flip, ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "FitLog",
@@ -18,9 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SavedExerciseProvider>
           <body className="min-h-full flex flex-col">
             <Navbar />
-            <main className="min-h-screen">
-              {children}
-            </main>
+            <main className="min-h-screen">{children}</main>
             <footer className="py-8 bg-[#1a1d23]">
               <div className="flex justify-between items-center wrapper">
                 <div className="flex gap-4">
@@ -32,6 +31,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 </div>
               </div>
             </footer>
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
+              transition={Flip}
+            />
           </body>
         </SavedExerciseProvider>
       </PlannedExerciseProvider>
