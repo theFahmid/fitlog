@@ -8,6 +8,9 @@ import { WorkoutDataType } from "@/types/workout";
 import { useState } from "react";
 
 export default function PlanPage() {
+  const [sortBy, setSortBy] = useState<"duration" | "calories" | "rating">(
+    "duration",
+  );
   const { savedExerciseData }: { savedExerciseData: WorkoutDataType[] } =
     useSavedExercise();
   const { plannedExerciseData }: { plannedExerciseData: WorkoutDataType[] } =
@@ -72,10 +75,16 @@ export default function PlanPage() {
         </div>
         <div className="flex flex-col">
           <p>Sort by</p>
-          <select defaultValue="Duration" className="select">
-            <option>Duration</option>
-            <option>Calories</option>
-            <option>Rating</option>
+          <select
+            value={sortBy}
+            onChange={(e) =>
+              setSortBy(e.target.value as "duration" | "calories" | "rating")
+            }
+            className="select"
+          >
+            <option value="duration">Duration</option>
+            <option value="calories">Calories</option>
+            <option value="rating">Rating</option>
           </select>
         </div>
       </div>
@@ -84,9 +93,17 @@ export default function PlanPage() {
           {savedExerciseData.length === 0 ? (
             <Nothing />
           ) : (
-            savedExerciseData.map((item) => (
-              <SelectedCard data={item} tab={tab} key={item.id} />
-            ))
+            [...savedExerciseData]
+              .sort((a, b) =>
+                sortBy === "calories"
+                  ? a.caloriesBurned - b.caloriesBurned
+                  : sortBy === "rating"
+                    ? a.rating - b.rating
+                    : a.duration - b.duration,
+              )
+              .map((item) => (
+                <SelectedCard data={item} tab={tab} key={item.id} />
+              ))
           )}
         </div>
       )}
@@ -95,9 +112,17 @@ export default function PlanPage() {
           {plannedExerciseData.length === 0 ? (
             <Nothing />
           ) : (
-            plannedExerciseData.map((item) => (
-              <SelectedCard data={item} tab={tab} key={item.id} />
-            ))
+            [...plannedExerciseData]
+              .sort((a, b) =>
+                sortBy === "calories"
+                  ? a.caloriesBurned - b.caloriesBurned
+                  : sortBy === "rating"
+                    ? a.rating - b.rating
+                    : a.duration - b.duration,
+              )
+              .map((item) => (
+                <SelectedCard data={item} tab={tab} key={item.id} />
+              ))
           )}
         </div>
       )}
