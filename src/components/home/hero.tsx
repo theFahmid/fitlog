@@ -14,9 +14,9 @@ export default function Hero() {
             FitLog is a dark, no-nonsense gym companion: pick a lift, lock it
             into today's plan, and watch the week's work add up.
           </p>
-          <Link href="#library">
-            <button>Browser Workouts</button>
-          </Link>
+          <a href="#library">
+            <button className="btn">Browser Workouts</button>
+          </a>
         </div>
         <div className="flex ">
           <Image

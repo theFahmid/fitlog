@@ -3,19 +3,20 @@
 import Image from "next/image";
 import logo from "@/assets/logo.png";
 import Link from "next/link";
-import { useState } from "react";
 import { useSavedExercise } from "@/contexts/savedExercise";
 import { usePlannedExercise } from "@/contexts/plannedExercise";
+import { usePathname } from "next/navigation";
 
 function NavItems() {
-  const [active, setActive] = useState("workout");
+  const pathname = usePathname()
+  const isHome = pathname === "/" || pathname.startsWith("/exercise")
+  const isPlan = pathname === "/my-plan"
   return (
     <>
       <li>
         <Link
           href="/"
-          className={active === "workout" ? "bg-gray-700 font-bold" : ""}
-          onClick={() => setActive("workout")}
+          className={isHome ? "bg-gray-700 font-bold" : ""}
         >
           Workouts
         </Link>
@@ -23,8 +24,8 @@ function NavItems() {
       <li>
         <Link
           href="/my-plan"
-          className={active === "plan" ? "bg-gray-700 font-bold" : ""}
-          onClick={() => setActive("plan")}
+          className={isPlan ? "bg-gray-700 font-bold" : ""}
+        
         >
           My Plan
         </Link>
@@ -85,11 +86,11 @@ export default function Navbar() {
               <NavItems />
             </ul>
           </div>
-          <div className="navbar-end">
-            <Link className="btn" href="/my-plan">
+          <div className="navbar-end flex items-center gap-4">
+            <Link className="btn btn-accent" href="/my-plan">
               Plan ({plannedExerciseData.length})
             </Link>
-            <Link className="btn" href="/my-plan">
+            <Link className="btn btn-outline" href="/my-plan">
               Saved ({savedExerciseData.length})
             </Link>
           </div>
