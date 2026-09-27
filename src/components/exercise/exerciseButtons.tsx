@@ -2,6 +2,8 @@
 import { usePlannedExercise } from "@/contexts/plannedExercise";
 import { useSavedExercise } from "@/contexts/savedExercise";
 import { WorkoutDataType } from "@/types/workout";
+import { FaBookmark, FaCalendar } from "react-icons/fa";
+import { Flip, toast } from "react-toastify";
 
 export default function ExerciseButtons({ data }: { data: WorkoutDataType }) {
   const { addSavedExercise } = useSavedExercise();
@@ -12,9 +14,10 @@ export default function ExerciseButtons({ data }: { data: WorkoutDataType }) {
         className="btn btn-primary"
         onClick={() => {
           addPlannedExercise(data);
+           
         }}
       >
-        Add to today's plan
+        <FaCalendar/> Add to today's plan
       </button>
       <button
         className="btn btn-outline"
@@ -22,7 +25,7 @@ export default function ExerciseButtons({ data }: { data: WorkoutDataType }) {
           addSavedExercise(data);
         }}
       >
-        Save for later
+         <FaBookmark/> Save for later
       </button>
     </div>
   );

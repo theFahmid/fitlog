@@ -35,9 +35,9 @@ export default async function ExercisePage({
           className="rounded-xl h-full w-full"
         />
       </div>
-      <div className="space-y-2">
-        <h2>{data.name}</h2>
-        <p>{data.description}</p>
+      <div className="space-y-4">
+        <h2 className="text-3xl ">{data.name}</h2>
+        <p className="text-slate-500">{data.description}</p>
         <div className="flex gap-2">
           {data.muscleGroups.map((item, ind) => (
             <div className="badge text-sm bg-mycolor rounded-full" key={ind}>
@@ -45,12 +45,12 @@ export default async function ExercisePage({
             </div>
           ))}
         </div>
-        <div className="border border-slate-300 rounded-3xl grid grid-cols-1">
+        <div className="border border-slate-500 bg-gray-900 rounded-3xl grid grid-cols-1">
           {tableData.map((item, ind) => {
             return (
-              <div key={ind} className="grid grid-cols-2 p-4">
-                <div className="uppercase">{item[0]}</div>
-                <div>{item[1]}</div>
+              <div key={ind} className={`grid grid-cols-2 p-4 ${tableData.length-1 > ind && "border-b border-b-slate-700"}`}>
+                <div className="uppercase font-bold">{item[0]}</div>
+                {item[0] === "Duration" ? <div>{item[1]} min</div> : item[0] === "Calories" ? <div>{item[1]} kcal</div> : <div>{item[1]}</div>}
               </div>
             );
           })}

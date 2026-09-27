@@ -2,6 +2,7 @@
 
 import { SavedExerciseContextType, WorkoutDataType } from "@/types/workout";
 import { createContext, useContext, useEffect, useState } from "react";
+import { Flip, toast } from "react-toastify";
 
 const SavedExerciseContext = createContext<SavedExerciseContextType | null>(
   null,
@@ -45,13 +46,49 @@ export default function SavedExerciseProvider({
   }, [savedExerciseData, isHydrated]);
 
   function addSavedExercise(exercise: WorkoutDataType) {
-    setSavedExerciseData((prev) =>
-      prev.some((e) => e.id === exercise.id) ? prev : [...prev, exercise],
-    );
+    if (savedExerciseData.some((e) => e.id === exercise.id)) {
+      toast.warning(`${exercise.name} has been already added your saved list`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Flip,
+      });
+    } else {
+      setSavedExerciseData((prev) =>
+        prev.some((e) => e.id === exercise.id) ? prev : [...prev, exercise],
+      );
+      toast.success(`${exercise.name} is saved for later`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Flip,
+      });
+    }
   }
 
   function removeSavedExercise(exercise: WorkoutDataType) {
     setSavedExerciseData((prev) => prev.filter((e) => e.id !== exercise.id));
+    toast.info(`${exercise.name} removed from your saved list`, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Flip,
+    });
   }
 
   return (
@@ -66,7 +103,9 @@ export default function SavedExerciseProvider({
 export function useSavedExercise() {
   const ctx = useContext(SavedExerciseContext);
   if (!ctx) {
-    throw new Error("useSavedExercise must be used inside SavedExerciseProvider")
+    throw new Error(
+      "useSavedExercise must be used inside SavedExerciseProvider",
+    );
   }
   return ctx;
 }

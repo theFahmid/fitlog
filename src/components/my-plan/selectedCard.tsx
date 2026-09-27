@@ -5,7 +5,6 @@ import { WorkoutDataType } from "@/types/workout";
 import Image from "next/image";
 import Link from "next/link";
 import { FaClock, FaFire, FaStar } from "react-icons/fa";
-import { Flip, toast } from "react-toastify";
 
 export default function SelectedCard({
   data,
@@ -25,19 +24,19 @@ export default function SelectedCard({
         <h4>{data.name}</h4>
         <p>{data.equipment}</p>
         <div className="flex gap-2 items-center">
-            <div className="flex item-center gap-1 justify-center">
-              <FaClock/>
-              {data.duration} min
-            </div>
-            <div className="flex item-center gap-1 justify-center">
-              <FaFire />
-              {data.caloriesBurned} kcal
-            </div>
-            <div className="flex item-center gap-1 justify-center">
+          <div className="flex item-center gap-1 justify-center">
+            <FaClock />
+            {data.duration} min
+          </div>
+          <div className="flex item-center gap-1 justify-center">
+            <FaFire />
+            {data.caloriesBurned} kcal
+          </div>
+          <div className="flex item-center gap-1 justify-center">
             <FaStar />
             {data.rating}
-            </div>
           </div>
+        </div>
       </div>
       <div className="flex items-center gap-4">
         <button className="btn">
@@ -58,30 +57,8 @@ export default function SelectedCard({
           onClick={() => {
             if (tab === "planned") {
               removePlannedExercise(data);
-              toast.info(`${data.name} removed from your planned`, {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                transition: Flip,
-              });
             } else {
               removeSavedExercise(data);
-              toast.info(`${data.name} removed from your stack`, {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                transition: Flip,
-              });
             }
           }}
         >
