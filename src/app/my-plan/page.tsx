@@ -1,5 +1,6 @@
 "use client";
 
+import Nothing from "@/components/my-plan/nothing";
 import SelectedCard from "@/components/my-plan/selectedCard";
 import { usePlannedExercise } from "@/contexts/plannedExercise";
 import { useSavedExercise } from "@/contexts/savedExercise";
@@ -14,20 +15,20 @@ export default function PlanPage() {
   const [tab, setTab] = useState("planned");
   return (
     <div className="wrapper py-8">
-      <h1>My Plan</h1>
+      <h1 className="text-3xl">My Plan</h1>
       <p>Cap of five lifts for today. Finish them, then load more.</p>
       <div className="grid grid-cols-3 border border-slate-600 bg-[#1a1d23] rounded-xl my-4 p-4">
         <div className="flex flex-col gap-2">
-          <div>Exercise</div>
-          <div>
+          <div className="font-bold">Exercise</div>
+          <div className="text-accent font-bold text-4xl">
             {tab === "planned"
               ? plannedExerciseData.length
               : savedExerciseData.length}
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <div>Minutes</div>
-          <div>
+          <div className="font-bold">Minutes</div>
+          <div className="text-accent font-bold text-4xl">
             {tab === "planned"
               ? plannedExerciseData.reduce((total, item) => {
                   return (total += item.duration);
@@ -38,8 +39,8 @@ export default function PlanPage() {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <div>Calories</div>
-          <div>
+          <div className="font-bold">Calories</div>
+          <div className="text-accent font-bold text-4xl">
             {tab === "planned"
               ? plannedExerciseData.reduce((total, item) => {
                   return (total += item.caloriesBurned);
@@ -79,9 +80,9 @@ export default function PlanPage() {
         </div>
       </div>
       {tab === "saved" && (
-        <div>
+        <div className="flex flex-col gap-4 my-4">
           {savedExerciseData.length === 0 ? (
-            <p>No exercises selected yet.</p>
+            <Nothing />
           ) : (
             savedExerciseData.map((item) => (
               <SelectedCard data={item} tab={tab} key={item.id} />
@@ -90,9 +91,9 @@ export default function PlanPage() {
         </div>
       )}
       {tab === "planned" && (
-        <div>
+        <div className="flex flex-col gap-4 my-4">
           {plannedExerciseData.length === 0 ? (
-            <p>No exercises planned yet.</p>
+            <Nothing />
           ) : (
             plannedExerciseData.map((item) => (
               <SelectedCard data={item} tab={tab} key={item.id} />

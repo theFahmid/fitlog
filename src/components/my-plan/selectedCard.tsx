@@ -38,7 +38,7 @@ export default function SelectedCard({
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 flex-wrap justify-center">
         <button className="btn">
           <Link href={`/exercise/${data.id}`}>View Details</Link>
         </button>
