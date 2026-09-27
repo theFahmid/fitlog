@@ -11,7 +11,7 @@ async function getWorkoutData(): Promise<WorkoutDataType[]> {
 export default async function Workouts() {
   const workoutData = await getWorkoutData();
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {workoutData.map((item) => (
         <WorkoutCard key={item.id} data={item} />
       ))}

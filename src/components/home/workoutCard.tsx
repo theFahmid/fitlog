@@ -1,5 +1,6 @@
 import { WorkoutDataType } from "@/types/workout";
 import Link from "next/link";
+import { FaClock, FaFire, FaStar } from "react-icons/fa";
 
 export default function WorkoutCard({ data }: { data: WorkoutDataType }) {
   return (
@@ -11,13 +12,30 @@ export default function WorkoutCard({ data }: { data: WorkoutDataType }) {
         <div className="card-body">
           <div className="flex gap-2">
             {data.muscleGroups.map((item, ind) => (
-            <div className="badge text-sm bg-slate-300 rounded-full" key={ind}>
-              {item}
-            </div>
-          ))}
+              <div
+                className="badge text-sm text-black bg-accent rounded-full"
+                key={ind}
+              >
+                {item}
+              </div>
+            ))}
           </div>
           <h2 className="card-title">{data.name}</h2>
           <p>{data.equipment}</p>
+          <div className="flex gap-2 items-center">
+            <div className="flex item-center gap-1 justify-center">
+              <FaClock/>
+              {data.duration} min
+            </div>
+            <div className="flex item-center gap-1 justify-center">
+              <FaFire />
+              {data.caloriesBurned} kcal
+            </div>
+            <div className="flex item-center gap-1 justify-center">
+            <FaStar />
+            {data.rating}
+            </div>
+          </div>
         </div>
       </div>
     </Link>

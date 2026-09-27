@@ -4,6 +4,7 @@ import { useSavedExercise } from "@/contexts/savedExercise";
 import { WorkoutDataType } from "@/types/workout";
 import Image from "next/image";
 import Link from "next/link";
+import { FaClock, FaFire, FaStar } from "react-icons/fa";
 import { Flip, toast } from "react-toastify";
 
 export default function SelectedCard({
@@ -23,9 +24,20 @@ export default function SelectedCard({
       <div>
         <h4>{data.name}</h4>
         <p>{data.equipment}</p>
-        <p>
-          {data.duration} min - {data.caloriesBurned}cal - {data.rating} rating
-        </p>
+        <div className="flex gap-2 items-center">
+            <div className="flex item-center gap-1 justify-center">
+              <FaClock/>
+              {data.duration} min
+            </div>
+            <div className="flex item-center gap-1 justify-center">
+              <FaFire />
+              {data.caloriesBurned} kcal
+            </div>
+            <div className="flex item-center gap-1 justify-center">
+            <FaStar />
+            {data.rating}
+            </div>
+          </div>
       </div>
       <div className="flex items-center gap-4">
         <button className="btn">
